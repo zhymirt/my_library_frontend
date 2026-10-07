@@ -6,7 +6,7 @@ export interface BookInfo {
   img_url: string,
 }
 
-export function Book(title: string, authors: string[], img_url: string) {
+export function Book({ title, authors, img_url }: BookInfo) {
   let author_string = "";
   switch (authors.length) {
     case 0:
@@ -16,11 +16,11 @@ export function Book(title: string, authors: string[], img_url: string) {
       author_string = authors[0];
       break;
     default:
-      author_string = authors[0] + authors.slice(1).map((author) => ", " + author).join();
+      author_string = authors.join(", ");
   }
   return (
     <div className="book">
-      (img_url != "") ? <img src={img_url} alt={"cover for book titled: " + title}></img> : <div></div>
+      {(img_url != "") ? <img src={img_url} alt={"cover for book titled: " + title}></img> : <div></div>}
       <p>{title}</p>
       <p>By: {author_string}</p>
     </div>
@@ -40,11 +40,11 @@ export function BookV1({ title, authors, img_url}: BookInfo) {
       author_string = authors[0];
       break;
     default:
-      author_string = authors[0] + authors.slice(1).map((author) => ", " + author).join();
+      author_string = authors.join(", ");
   }
   return (
     <div className="book">
-      (img_url != "") ? <img src={img_url}></img> : <div></div>
+      {(img_url != "") ? <img src={img_url} alt={"cover for book titled: " + title}></img> : <div></div>}
       <p>{title}</p>
       <p>By: {author_string}</p>
     </div>
@@ -64,11 +64,11 @@ export function BookV2({props}: {props: BookInfo}) {
       author_string = authors[0];
       break;
     default:
-      author_string = authors[0] + authors.slice(1).map((author) => ", " + author).join();
+      author_string = authors.join(", ");
   }
   return (
     <div className="book">
-      {(img_url != "") ? <img src={img_url}></img> : <div></div>}
+      {(img_url != "") ? <img src={img_url} alt={"cover for book titled: " + title}></img> : <div></div>}
       <p>{title}</p>
       <p>By: {author_string}</p>
     </div>
